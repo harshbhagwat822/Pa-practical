@@ -1,0 +1,47 @@
+#include <p18f4550.h> 
+ 
+#define en LATCbits.LC1 
+#define rs LATCbits.LC0 
+#define LCDPORT LATB 
+ 
+const unsigned char 
+LCD_Data1[]={"SIT"}; 
+const unsigned char 
+LCD_Data2[]={"Lonavala"}; 
+ 
+ 
+void lcdcmd(unsigned char 
+value); 
+void lcddata(unsigned char 
+value); 
+void MSdelay(unsigned int 
+itime); 
+ 
+void main() 
+ { 
+    unsigned char z=0; 
+ TRISB=0; 
+ TRISC=0; 
+ en=0; 
+      MSdelay(50); 
+ lcdcmd(0x38); //2line 
+and 5X7 matrix 
+ MSdelay(50); 
+ lcdcmd(0x0e); //Display 
+on, Curser blinking 
+ MSdelay(50); 
+ lcdcmd(0x01); //Clear 
+display screen 
+ MSdelay(50); 
+ lcdcmd(0x06); 
+//Shiftcursor to right 
+ MSdelay(50); 
+ 
+while(1) 
+        { 
+      lcdcmd(0x86); 
+ MSdelay(50); 
+      for (z=0;z<3;z++) 
+        { 
+      lcddata(LCD_Data1[z]); 
+ MSdelay(50); 
