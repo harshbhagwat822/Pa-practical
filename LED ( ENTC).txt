@@ -1,0 +1,46 @@
+/*
+ * File:   newmain.c
+ * Author: ACER
+ *
+ * Created on May 21, 2014, 2:35 PM
+ */
+// PIC18F4550 Configuration Bit Settings
+
+// 'C' source line config statements
+
+#include <p18f4550.h>
+
+void delay(void);
+
+void delay()
+{
+	unsigned int i;
+	for(i=0;i<40000;i++);
+}
+
+
+void main()
+{
+  unsigned int i;
+  TRISB = 0x00;
+
+  while(1)
+  {
+    for(i=0;i<8;i++)
+    {
+    LATB = 1<<i;
+    delay();
+    LATB = 0x00;
+    delay();
+    }
+    for(i=7;i>0;i--)
+    {
+    LATB = 1<<i;
+    delay();
+    LATB = 0x00;
+    delay();
+    }
+ }
+}
+
+
